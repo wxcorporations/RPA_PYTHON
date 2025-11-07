@@ -1,0 +1,21 @@
+Header do csv
+
+Atividade
+----------------------------------------
+Recever arquivo csv e processalo no final retornar 3 arquivos csv separados pelos tipo. [enviar, finalizar, criticar]
+
+Resumo:
+Consumir um csv e agrupar os dados com base na movimentação no final gere 3 arquivos para cada grupo agrupado [enviado, finalizado, criticado]
+
+campo que define o tipo: estatos-movimentação [enviar, finalizar, criticar]
+
+enviar: recebido pela api com sucesso.
+finalizar: já foi recebido e cadastrado.
+criticar: Houve um erro no processo.
+
+Requisitos funcionais
+----------------------------------------
+Deve garantir o processamento de arquivos com grande volume de dados, podendo term 10 ou 1 milhão de linhas.
+Seria interessante processar n arquivos.
+Não deve travar o servidor.
+A api deve receber solicitação de processamento simuntaneos.
