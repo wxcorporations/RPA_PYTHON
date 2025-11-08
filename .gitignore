@@ -1,1 +1,4 @@
 /reports/*.csv
+/uploads/*.
+**__pycache__/
+**.venv

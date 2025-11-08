@@ -55,9 +55,12 @@ async def create_fake(path, lines):
 
 async def read_lines_csv(path, process):
     extension = Path(path).suffix
-
+    total_lines = 0
     if extension != EXTENSION_EXPECTED: raise ValueError(EXTENSION_INVALID_ERROR_MSG)
     
     with open(path) as csv_file:
         for line in csv_file:
             await process(line)
+            total_lines += 1
+
+    return total_lines
