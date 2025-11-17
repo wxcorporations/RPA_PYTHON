@@ -14,6 +14,7 @@ EXTENSION_INVALID_ERROR_MSG = 'Seu arquivo deve ser um csv compatíveis!'
 # ===================================================================================================
 EXTENSION_EXPECTED = '.csv'
 ALLOWED_EXTENSIONS = {'.csv'}
+ENCODE_FILE = 'utf-8'
 
 # LISTS
 # ===================================================================================================

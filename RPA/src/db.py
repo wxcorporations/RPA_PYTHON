@@ -6,8 +6,6 @@ class DataBase:
     def __init__(self):
         self.connect = sqlite3.connect('reports.db')
         self.cursor = self.connect.cursor()
-        # self.__create_table_pending()
-        # self.__create_table_processed()
         
         self.__create_table_file_category()
         self.__create_table_reports()
@@ -101,74 +99,5 @@ class DataBase:
         ''', (name))
         self.connect.commit()
 
-
-
-
-
-    # def __create_table_processed(self):
-    #     self.cursor.execute('''
-    #         CREATE TABLE IF NOT EXISTS processed (
-    #             id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #             create_at DATETIME,
-    #             name TEXT NOT NULL,
-    #             total_itens NUMBER NOT NULL,
-    #             size NUMBER,
-    #             woner TEXT NOT NULL,
-    #             report_error TEXT,
-    #             report_finish TEXT,
-    #             report_sent TEXT 
-    #         );
-    #     ''')
-    #     self.connect.commit()
-
-    # def __create_table_pending(self):
-    #     self.cursor.execute('''
-    #         CREATE TABLE IF NOT EXISTS pending (
-    #             create_at DATETIME,
-    #             name TEXT PRIMARY KEY NOT NULL,
-    #             woner TEXT NOT NULL,
-    #             active NUMBER NOT NULL
-    #         );
-    #     ''')
-    #     self.connect.commit()
-    
-    # def save_processed(self, name, total_itens, size, woner, report_error, report_finish, report_sent):
-    #     agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
-    #     INSERT = '''
-    #         INSERT INTO processed (create_at, name, total_itens, size, woner, report_error, report_finish, report_sent) 
-    #         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    #     '''
-        
-    #     self.cursor.execute(INSERT, (agora, name, total_itens, size, woner, report_error, report_finish, report_sent))
-    #     self.connect.commit()
-
-    # def save_pending(self, name, woner):
-    #     agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    #     INSERT = '''
-    #         INSERT INTO pending (create_at, name, woner, active) 
-    #         VALUES (?, ?, ?, ?)
-    #     '''
-    #     self.cursor.execute(INSERT, (agora, name, woner, 1))
-    #     self.connect.commit()
-    
-    # def finish_pending(self, name):
-    #     self.cursor.execute("UPDATE pending SET active = ? WHERE name = ?", (0, name))
-    #     self.connect.commit()
-        
-    # def list_processed(self):
-    #     return self.cursor.execute("SELECT * FROM processed").fetchall()
-               
-    # def list_pending(self):
-    #     return self.cursor.execute("SELECT * FROM pending").fetchall()
-    
-    # def get_oldest_pending(self):
-    #     return self.cursor.execute("SELECT * FROM pending WHERE active = 1 ORDER BY create_at LIMIT 1" ).fetchone()
-    
-    # def connect_close(self):
-    #     self.connect.close()    
-        
     def rollback(self):
         self.connect.rollback()
-
-# INSTANCE_DB = DataBase()
