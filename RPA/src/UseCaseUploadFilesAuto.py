@@ -9,12 +9,9 @@ def name_file_dinamic():
     return f'arquivo-{random.randrange(start=1, stop=100)}-{random.randrange(start=1, stop=100)}.csv'
 
 def send_file(path):
-    url = 'http://127.0.0.1:5000/report'  # Replace with your target URL
-
-    data = { 'name': f'fernando-{random.randrange(start=1, stop=100)}' }
-
     name = name_file_dinamic()
-    
+    url = 'http://127.0.0.1:5000/report'
+    data = { 'name': f'fernando-{random.randrange(start=1, stop=100)}' }
     files = { 'file': (name, open(path, 'rb'), 'text/csv') }
 
     response = requests.post(url, data=data, files=files)
@@ -29,12 +26,16 @@ class UseCaseUploadFilesAuto:
         print('iniciando')
     
     def execute(self): 
+        print('executando upload de arquivos...')
+        print('---------------------------------------------')
         arquivos = os.listdir(DATA_ORIGIN_FOLDER)
         
         for file in arquivos:
             path_file = f'{DATA_ORIGIN_FOLDER}{file}'
             send_file(path_file)
-        
+            
+        print('upload finalizado!')
+        print('---------------------------------------------')
 
 run = UseCaseUploadFilesAuto()
 

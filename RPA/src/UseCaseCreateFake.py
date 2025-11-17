@@ -11,8 +11,6 @@ class UseCaseCreateFake:
     def execute(self):
         for index in range(self.total_file):
             total_itens = random.randrange(10, 1_000_000)
-            
-            print(total_itens)
 
             data = FakeDataReport.create(template_csv_fake, total_itens)
             FileCsv.create(f"{self.output}relatorio-origem-{index}.csv", HEADER_COLUMNS, data)

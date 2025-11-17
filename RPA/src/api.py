@@ -11,12 +11,7 @@ from utils import extension_valid
 from werkzeug.utils import secure_filename
 from config import ALLOWED_EXTENSIONS, UPLOAD_FOLDER
 from flask import Flask, flash, request, redirect, url_for
-
-
-# from db import INSTANCE_DB
-# from hash_id import get_hash
 from Hash import Hash
-
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -36,8 +31,6 @@ def dashboard():
 def upload_file():
     try:
         if request.method == 'POST':
-            print('Passou aqui na api ==========================')
-            
             DB = DataBase()
         
             if 'file' not in request.files:
@@ -45,8 +38,6 @@ def upload_file():
                 return redirect(request.url)
             
             file = request.files['file']
-            
-            print('Passou aqui 2 ', file)
 
             if not file or file.filename == '':
                 flash('No selected file')
@@ -59,17 +50,11 @@ def upload_file():
                 file.save(name_tmp)
                 hash = Hash.by_file(name_tmp)
 
-                print('hash ============= ', hash)
-
                 os.rename(name_tmp, f"{UPLOAD_FOLDER}{hash}.csv")
-
-                print('passo aqui 3 ')
                 
                 woner = request.form.get('name')
                 
-                # DB.save_pending(hash, woner)
                 DB.save_file(hash, woner, 0)
-                print('passo aqui 3 ')
                 
                 # RETORNA USUARIO PAR PAGINA DE LISTAGEM
                 return redirect(url_for('dashboard', name=filename))

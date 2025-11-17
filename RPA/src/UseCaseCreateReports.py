@@ -1,8 +1,9 @@
-from pathlib import Path
 import re
-from config import HEADER_COLUMNS
-from FileCsv import FileCsv
+
 from db import DataBase
+from pathlib import Path
+from FileCsv import FileCsv
+from config import HEADER_COLUMNS
 
         
 class UseCaseCreateReports:
@@ -27,16 +28,9 @@ class UseCaseCreateReports:
         
         data_to_list = data.replace("\n", "").split(',')
 
-        if is_sent: 
-            FileCsv.add_line(self.out_sent, data_to_list)
-                    
-        if is_error: 
-            FileCsv.add_line(self.out_error, data_to_list)
-        
-        if is_finish: 
-            FileCsv.add_line(self.out_finish, data_to_list)
-    
-    
+        if is_sent: FileCsv.add_line(self.out_sent, data_to_list)
+        if is_error: FileCsv.add_line(self.out_error, data_to_list)
+        if is_finish: FileCsv.add_line(self.out_finish, data_to_list)
     
     def __save_report_inner_data_base(self):
         sent = [ FileCsv.total_itens(self.out_sent), Path(self.out_sent).stat().st_size, 1 ]
@@ -48,17 +42,19 @@ class UseCaseCreateReports:
         for data in [sent, error, finish]:
             itens, size, category = data
             DB.save_report(name=self.name_file, itens=itens, size=size, category=category)
+            
         DB.connect.close()
     
     def execute(self):
-        try:    
+        try:
+            print('Iniciando processamento:')
+            print('---------------------------------------------')
             path_file_process = f'{self.dir_upload}{self.name_file}.csv'
             FileCsv.read_lines(path_file_process, self.__manager_reports)
             
             self.__save_report_inner_data_base()
-                        
-            
-            print('====================     relatorios criados     ========================')
+            print('Relatorios criados com sucesso! \n')
+            print('---------------------------------------------')
             
         except ValueError:
             raise TypeError('Não foi possivel gerar os relatorios')
