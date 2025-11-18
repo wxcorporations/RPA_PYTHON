@@ -20,7 +20,7 @@ def msg():
 # args pode ser homitido, caso preceise passar parametros para sua funcao passe detro de uma lista para args
 def run_in_threads(**kwargs):
     try:
-        args = kwargs.get('args', tuple())
+        args = kwargs.get('args', ())
         func = kwargs.get('func', None)
         threads_factor = kwargs.get('threads', 0.7)
         

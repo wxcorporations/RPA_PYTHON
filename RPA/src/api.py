@@ -48,13 +48,13 @@ def upload_file():
                 name_tmp = os.path.join(UPLOAD_FOLDER, filename)
                 
                 file.save(name_tmp)
-                hash = Hash.by_file(name_tmp)
+                hash_name = Hash.by_file(name_tmp)
 
-                os.rename(name_tmp, f"{UPLOAD_FOLDER}{hash}.csv")
+                os.rename(name_tmp, f"{UPLOAD_FOLDER}{hash_name}.csv")
                 
                 woner = request.form.get('name')
                 
-                DB.save_file(hash, woner, 0)
+                DB.save_file(hash_name, woner, 0)
                 
                 # RETORNA USUARIO PAR PAGINA DE LISTAGEM
                 return redirect(url_for('dashboard', name=filename))
@@ -74,4 +74,4 @@ def upload_file():
         
 @app.errorhandler(404)
 def page_not_found(error):
-    return f'rota invalida', 404
+    return 'rota invalida', 404

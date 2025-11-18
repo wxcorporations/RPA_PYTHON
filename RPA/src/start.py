@@ -4,13 +4,13 @@ from config import DATA_ORIGIN_FOLDER, REPORT_FOLDER, UPLOAD_FOLDER
 
 def run_command(command):
     try:
-        process = subprocess.Popen(command, shell=True)
+        subprocess.Popen(command, shell=True)
     except Exception as e:
         print(f"Error =====================> : {e}")
         return
     
 def clean_store():
-    run_command(f"rm -rf ./reports.db")
+    run_command("rm -rf ./reports.db")
     run_command(f"rm -rf {DATA_ORIGIN_FOLDER}*.csv")  
     run_command(f"rm -rf {REPORT_FOLDER}*.csv")  
     run_command(f"rm -rf {UPLOAD_FOLDER}*.csv")

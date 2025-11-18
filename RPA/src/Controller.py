@@ -41,13 +41,13 @@ def use_case_process_file():
                 print('item:', item)
                 name = item[0]
                 
-                createReports = UseCaseCreateReports(
+                create_reports = UseCaseCreateReports(
                     dir_upload=f"{UPLOAD_FOLDER}",
                     out_report=REPORT_FOLDER,
                     name_file=name
                 )
                 
-                createReports.execute()
+                create_reports.execute()
                 list_file_finish.append(name)
                 
             except ValueError as error:

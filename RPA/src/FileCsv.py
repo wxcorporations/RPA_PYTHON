@@ -11,7 +11,7 @@ class FileCsv:
     def total_itens(path):
         count = 0
         with open(path, mode='r', encoding=ENCODE_FILE) as file:
-            for row in file:
+            for _ in file:
                 count += 1    
         return count
 
@@ -20,10 +20,10 @@ class FileCsv:
         with open(path, mode='w', encoding=ENCODE_FILE) as file:
             csv_file = csv.writer(file)
             
-            if not header is None:
+            if header != None:
                 csv_file.writerow(header)
             
-            if not data is None:
+            if data != None:
                 csv_file.writerows(data)
     
     # Este metodo espera uma lista com string com valores de cada coluna.
